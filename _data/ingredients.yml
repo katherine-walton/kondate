@@ -1,0 +1,65 @@
+# Shared ingredient catalog. Recipes refer to these by key (e.g. salmon-fillet).
+#
+#   key:
+#     name: Display name
+#     unit: [singular, plural]   # use ["", ""] for plain counts
+#     options:                   # store + photo pairs, in display order
+#       - store: Costco          # Costco, Whole Foods, Trader Joe's, Grocery
+#         photo: /assets/ingredients/file.jpg   # optional
+
+salmon-fillet:
+  name: Salmon fillets
+  unit: [fillet, fillets]
+  options:
+    - store: Costco
+    - store: Trader Joe's
+
+white-miso:
+  name: White miso
+  unit: [tbsp, tbsp]
+  options:
+    - store: Whole Foods
+
+short-grain-rice:
+  name: Short-grain rice
+  unit: [cup, cups]
+  options:
+    - store: Costco
+
+cucumber:
+  name: Cucumber
+  unit: ["", ""]
+  options:
+    - store: Trader Joe's
+    - store: Grocery
+
+scallion:
+  name: Scallions
+  unit: [bunch, bunches]
+  options:
+    - store: Grocery
+
+chicken-thigh:
+  name: Chicken thighs
+  unit: [lb, lb]
+  options:
+    - store: Costco
+
+farro:
+  name: Farro
+  unit: [cup, cups]
+  options:
+    - store: Trader Joe's
+
+kale:
+  name: Kale
+  unit: [bunch, bunches]
+  options:
+    - store: Whole Foods
+    - store: Grocery
+
+lemon:
+  name: Lemons
+  unit: ["", ""]
+  options:
+    - store: Grocery

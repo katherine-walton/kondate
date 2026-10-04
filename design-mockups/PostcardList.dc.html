@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Kondate — grocery list</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#2B2823}a:hover{color:#000}
+</style>
+</helmet>
+<div style="width: 100%; min-height: 100%; background: #F6F3ED; color: #2B2823; font-family: 'DM Mono', 'SFMono-Regular', Menlo, Consolas, monospace; box-sizing: border-box; padding: 32px 20px 72px">
+<div style="max-width: 1124px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px">
+
+<header style="display: flex; align-items: center; justify-content: space-between; gap: 16px">
+<a href="PostcardMenu.dc.html" style="font-size: 22px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; text-decoration: none">Kondate</a>
+<a href="PostcardMenu.dc.html" aria-label="Close grocery list" style="box-sizing: border-box; height: 44px; padding: 0 16px; border: 1px solid #2B2823; background: #2B2823; color: #F6F3ED; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; display: flex; align-items: center; gap: 10px">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+<span>Close</span>
+</a>
+</header>
+
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px; padding-bottom: 18px; border-bottom: 1px solid #2B2823">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<h1 style="margin: 0; font-size: 22px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase">Grocery list</h1>
+<span style="font-size: 11px; letter-spacing: 0.06em; color: #5E5A52">{{summary}}</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<button type="button" style="height: 44px; padding: 0 16px; border: 1px solid #2B2823; background: #2B2823; color: #F6F3ED; font-family: inherit; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; display: flex; align-items: center; gap: 8px; cursor: pointer">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V4"></path><path d="M8 8l4-4 4 4"></path><path d="M6 12v7h12v-7"></path></svg>
+<span>Share list</span>
+</button>
+<button type="button" onClick="{{clearAll}}" style="height: 44px; padding: 0 16px; border: 1px solid #2B2823; background: transparent; color: #2B2823; font-family: inherit; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer">Start over</button>
+</div>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 40px">
+
+<aside aria-label="Recipes on this list" style="flex: 1 1 300px; max-width: 380px; min-width: 0; display: flex; flex-direction: column; gap: 12px">
+<h2 style="margin: 0; font-size: 13px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase">Recipes</h2>
+<sc-if value="{{noRecipes}}" hint-placeholder-val="{{ false }}">
+<p style="margin: 0; font-size: 13px; line-height: 1.6; color: #5E5A52">No recipes yet. Add one from a dish page.</p>
+</sc-if>
+<sc-for list="{{recipes}}" as="r" hint-placeholder-count="2">
+<div style="display: flex; align-items: center; gap: 12px; padding: 10px; background: #F9F7F2; border: 1px solid #2B2823">
+<span style="width: 60px; height: 60px; flex: none; background: #E6E0D5; display: flex; align-items: center; justify-content: center; font-size: 9px; letter-spacing: 0.14em; color: #5E5A52">PHOTO</span>
+<a href="PostcardDetail.dc.html" style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 4px; text-decoration: none">
+<span style="font-size: 11px; letter-spacing: 0.06em; color: #5E5A52">NO. {{r.no}}</span>
+<span style="font-size: 13px; font-weight: 500; line-height: 1.35; letter-spacing: 0.02em; text-transform: uppercase">{{r.name}}</span>
+</a>
+<button type="button" aria-label="{{r.removeLabel}}" onClick="{{r.remove}}" style="width: 44px; height: 44px; flex: none; border: 0; background: transparent; color: #2B2823; display: flex; align-items: center; justify-content: center; cursor: pointer">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+</button>
+</div>
+</sc-for>
+</aside>
+
+<section aria-label="Items to buy" style="flex: 999 1 460px; min-width: 0; display: flex; flex-direction: column; gap: 32px">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding-bottom: 6px">
+<h2 style="margin: 0; font-size: 13px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase">To buy</h2>
+<span style="font-size: 11px; letter-spacing: 0.06em; color: #5E5A52">{{toBuyLabel}}</span>
+</div>
+<sc-for list="{{toBuy}}" as="it" hint-placeholder-count="6">
+<button type="button" aria-pressed="{{it.got}}" onClick="{{it.toggle}}" style="width: 100%; padding: 12px 0; border: 0; background: transparent; color: #2B2823; font-family: inherit; text-align: left; display: flex; align-items: center; gap: 14px; cursor: pointer">
+<span style="width: 22px; height: 22px; flex: none; box-sizing: border-box; border: 1px solid #2B2823"></span>
+<span style="width: 52px; height: 52px; flex: none; background: #E6E0D5; display: flex; align-items: center; justify-content: center; font-size: 8px; letter-spacing: 0.14em; color: #5E5A52">PHOTO</span>
+<span style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+<span style="display: flex; align-items: baseline; gap: 10px">
+<span style="font-size: 15px">{{it.name}}</span>
+<span aria-hidden="true" style="flex: 1 1 auto; min-width: 16px; border-bottom: 1px dotted #8F877A"></span>
+<span style="font-size: 14px; font-weight: 500; white-space: nowrap">{{it.total}}</span>
+</span>
+<span style="font-size: 11px; line-height: 1.5; letter-spacing: 0.04em; text-transform: uppercase; color: #5E5A52">{{it.stores}}</span>
+<sc-if value="{{it.shared}}" hint-placeholder-val="{{ false }}">
+<span style="font-size: 11px; line-height: 1.5; color: #5E5A52">{{it.breakdown}}</span>
+</sc-if>
+</span>
+</button>
+</sc-for>
+</div>
+
+<sc-if value="{{hasGot}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding-bottom: 6px; border-top: 1px solid #2B2823; padding-top: 16px">
+<h2 style="margin: 0; font-size: 13px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #5E5A52">In the basket</h2>
+<span style="font-size: 11px; letter-spacing: 0.06em; color: #5E5A52">{{gotLabel}}</span>
+</div>
+<sc-for list="{{got}}" as="it" hint-placeholder-count="1">
+<button type="button" aria-pressed="{{it.got}}" onClick="{{it.toggle}}" style="width: 100%; min-height: 48px; padding: 8px 0; border: 0; background: transparent; color: #8F877A; font-family: inherit; text-align: left; display: flex; align-items: center; gap: 14px; cursor: pointer">
+<span style="width: 22px; height: 22px; flex: none; box-sizing: border-box; border: 1px solid #2B2823; background: #2B2823; color: #F6F3ED; display: flex; align-items: center; justify-content: center">
+<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>
+</span>
+<span style="flex: 1 1 auto; font-size: 14px; text-decoration: line-through">{{it.name}}</span>
+<span style="font-size: 13px; white-space: nowrap; text-decoration: line-through">{{it.total}}</span>
+</button>
+</sc-for>
+</div>
+</sc-if>
+</section>
+
+</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":1300}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { removed: {}, got: { sesame: true } };
+  }
+  renderVals() {
+    const s = this.state;
+    const allRecipes = [
+      { id: 'miso', no: '01', name: 'Miso salmon rice bowl', short: 'Miso salmon' },
+      { id: 'taco', no: '04', name: 'Turkey taco rice bowl', short: 'Turkey taco' }
+    ];
+    const catalog = [
+      { id: 'rice', name: 'Short-grain rice', unit: ['cup', 'cups'], stores: ['Costco', 'Grocery'], uses: { miso: 1, taco: 1 } },
+      { id: 'salmon', name: 'Salmon fillets', unit: ['fillet', 'fillets'], stores: ['Costco', "Trader Joe's"], uses: { miso: 2 } },
+      { id: 'turkey', name: 'Ground turkey', unit: ['lb', 'lb'], stores: ['Costco'], uses: { taco: 1 } },
+      { id: 'miso', name: 'White miso paste', unit: ['tbsp', 'tbsp'], stores: ['Whole Foods'], uses: { miso: 2 } },
+      { id: 'cuke', name: 'Persian cucumbers', unit: ['', ''], stores: ["Trader Joe's"], uses: { miso: 2 } },
+      { id: 'scallion', name: 'Scallions', unit: ['bunch', 'bunches'], stores: ['Grocery'], uses: { miso: 1, taco: 1 } },
+      { id: 'beans', name: 'Black beans', unit: ['can', 'cans'], stores: ["Trader Joe's"], uses: { taco: 1 } },
+      { id: 'salsa', name: 'Salsa verde', unit: ['jar', 'jars'], stores: ["Trader Joe's"], uses: { taco: 1 } },
+      { id: 'sesame', name: 'Toasted sesame seeds', unit: ['tbsp', 'tbsp'], stores: ["Trader Joe's"], uses: { miso: 1 } }
+    ];
+    const active = allRecipes.filter((r) => !s.removed[r.id]);
+    const activeIds = {};
+    active.forEach((r) => { activeIds[r.id] = true; });
+    const fmt = (n, unit) => (n + ' ' + (n === 1 ? unit[0] : unit[1])).trim();
+    const items = [];
+    catalog.forEach((c) => {
+      const parts = Object.keys(c.uses).filter((rid) => activeIds[rid]);
+      if (!parts.length) return;
+      const total = parts.reduce((sum, rid) => sum + c.uses[rid], 0);
+      const got = !!s.got[c.id];
+      items.push({
+        name: c.name,
+        total: fmt(total, c.unit),
+        stores: c.stores.join(' · '),
+        shared: parts.length > 1,
+        breakdown: parts.map((rid) => allRecipes.find((r) => r.id === rid).short + ' ' + fmt(c.uses[rid], c.unit)).join(' + '),
+        got,
+        toggle: () => this.setState({ got: Object.assign({}, s.got, { [c.id]: !got }) })
+      });
+    });
+    const toBuy = items.filter((i) => !i.got);
+    const got = items.filter((i) => i.got);
+    const plural = (n, w) => n + ' ' + w + (n === 1 ? '' : 'S');
+    return {
+      recipes: active.map((r) => ({
+        no: r.no,
+        name: r.name,
+        removeLabel: 'Remove ' + r.name + ' from list',
+        remove: () => this.setState({ removed: Object.assign({}, s.removed, { [r.id]: true }) })
+      })),
+      noRecipes: active.length === 0,
+      summary: plural(active.length, 'RECIPE') + ' · ' + plural(items.length, 'ITEM'),
+      toBuy,
+      got,
+      hasGot: got.length > 0,
+      toBuyLabel: toBuy.length + ' LEFT',
+      gotLabel: String(got.length),
+      clearAll: () => this.setState({ removed: { miso: true, taco: true }, got: {} })
+    };
+  }
+}
+</script>
+</body>
+</html>

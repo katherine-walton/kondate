@@ -1,0 +1,19 @@
+---
+layout: default
+---
+<div class="stack">
+  <header class="site-header">
+    <h1 class="site-title">Kondate</h1>
+    <a class="btn btn--outline" href="{{ '/list/' | relative_url }}" data-list-link aria-label="Open grocery list">
+      {% include icon.html name="tote" px=18 %}
+      <span>List (<span data-list-count>0</span>)</span>
+    </a>
+  </header>
+
+  <main class="menu-grid">
+    {%- assign recipes = site.recipes | sort: "number" -%}
+    {%- for recipe in recipes %}
+    {% include dish-card.html recipe=recipe link=true %}
+    {%- endfor %}
+  </main>
+</div>

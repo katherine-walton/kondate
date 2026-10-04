@@ -1,0 +1,25 @@
+{%- comment -%}
+  Dish card: number + name, tag row, square photo.
+  Usage: {% include dish-card.html recipe=recipe link=true %}
+{%- endcomment -%}
+{%- assign r = include.recipe -%}
+{%- if include.link -%}<a class="dish-card" href="{{ r.url | relative_url }}">{%- else -%}<div class="dish-card">{%- endif %}
+  <div class="dish-card__head">
+    <span class="dish-card__no">NO. {% include recipe-number.html n=r.number %}</span>
+    <h3 class="dish-card__name">{{ r.title }}</h3>
+  </div>
+  {%- if r.tags and r.tags.size > 0 %}
+  <div class="dish-card__tags">
+    {%- if r.tags contains "protein" %}<span class="tag">{% include icon.html name="egg" %}High protein</span>{% endif %}
+    {%- if r.tags contains "quick" %}<span class="tag">{% include icon.html name="clock" %}Quick</span>{% endif %}
+    {%- if r.tags contains "fiber" %}<span class="tag">{% include icon.html name="leaf" %}High fiber</span>{% endif %}
+  </div>
+  {%- endif %}
+  <div class="dish-card__photo">
+    {%- if r.photo %}
+    <img src="{{ r.photo | relative_url }}" alt="{{ r.title }}" loading="lazy" width="800" height="800">
+    {%- else %}
+    <div class="photo-placeholder" aria-hidden="true">PHOTO</div>
+    {%- endif %}
+  </div>
+{% if include.link -%}</a>{%- else -%}</div>{%- endif -%}

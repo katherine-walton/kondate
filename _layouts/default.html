@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{{ site.description }}">
+  <meta name="theme-color" content="#F6F3ED">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">
+</head>
+<body>
+  <div class="page">
+    {{ content }}
+  </div>
+  <script src="{{ '/assets/js/list-store.js' | relative_url }}"></script>
+  {% if page.scripts %}{% for s in page.scripts %}<script src="{{ s | relative_url }}"></script>
+  {% endfor %}{% endif %}
+</body>
+</html>

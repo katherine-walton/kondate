@@ -1,0 +1,26 @@
+title: Kondate
+description: What we can cook, what to buy, and where to buy it.
+baseurl: /kondate
+url: ""
+theme: null   # no GitHub Pages default theme; all styles are in assets/css/site.css
+
+collections:
+  recipes:
+    output: true
+    permalink: /recipes/:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: recipes
+    values:
+      layout: recipe
+
+exclude:
+  - CLAUDE.md
+  - FUTURE_FEATURES.md
+  - README.md
+  - design-mockups
+  - Gemfile
+  - Gemfile.lock
+  - vendor

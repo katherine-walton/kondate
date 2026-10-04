@@ -1,0 +1,13 @@
+---
+layout: default
+---
+{%- comment -%}
+  Placeholder dish page so menu links work. The full design (ingredients,
+  nutrition, steps, cooking mode) gets built in the next step.
+{%- endcomment -%}
+<div class="stack">
+  <nav><a class="back-link" href="{{ '/' | relative_url }}">← All dishes</a></nav>
+  <div style="max-width: 480px; width: 100%">
+    {% include dish-card.html recipe=page %}
+  </div>
+</div>

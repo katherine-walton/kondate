@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Kondate — dish detail</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#2B2823}a:hover{color:#000}
+</style>
+</helmet>
+<div style="width: 100%; min-height: 100%; background: #F6F3ED; color: #2B2823; font-family: 'DM Mono', 'SFMono-Regular', Menlo, Consolas, monospace; box-sizing: border-box; padding: 32px 20px 72px">
+<div style="max-width: 1124px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px">
+
+<header style="display: flex; align-items: center; justify-content: space-between; gap: 16px">
+<a href="PostcardMenu.dc.html" style="font-size: 22px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; text-decoration: none">Kondate</a>
+<a href="PostcardList.dc.html" aria-label="Open grocery list, 2 recipes" style="box-sizing: border-box; text-decoration: none; height: 44px; padding: 0 16px; border: 1px solid #2B2823; background: transparent; color: #2B2823; font-family: inherit; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; display: flex; align-items: center; gap: 10px; cursor: pointer">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1.2 12H6.2z"></path><path d="M9 8a3 3 0 0 1 6 0"></path></svg>
+<span>List (2)</span>
+</a>
+</header>
+
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px">
+<a href="PostcardMenu.dc.html" style="display: flex; align-items: center; gap: 8px; min-height: 44px; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; color: #5E5A52">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"></path></svg>
+<span>All dishes</span>
+</a>
+<button type="button" aria-pressed="{{cooking}}" onClick="{{toggleCooking}}" style="min-height: 44px; padding: 0 4px 0 0; border: 0; background: transparent; color: #2B2823; font-family: inherit; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; display: flex; align-items: center; gap: 12px; cursor: pointer">
+<span>Cooking mode</span>
+<span style="{{trackStyle}}"><span style="{{knobStyle}}"></span></span>
+</button>
+</div>
+
+<sc-if value="{{browsing}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 40px">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 40px">
+
+<div style="flex: 1 1 380px; max-width: 520px; min-width: 0; display: flex; flex-direction: column; gap: 14px">
+<div style="background: #F9F7F2; border: 1px solid #2B2823">
+<div style="padding: 16px 18px; display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 11px; letter-spacing: 0.06em; color: #5E5A52">NO. 01</span>
+<h1 style="margin: 0; font-size: 22px; font-weight: 500; line-height: 1.3; letter-spacing: 0.02em; text-transform: uppercase; text-wrap: balance">Miso salmon rice bowl</h1>
+</div>
+<div style="border-top: 1px solid #2B2823; padding: 12px 18px; display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13px">
+<span style="display: flex; align-items: center; gap: 6px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3.5c3.4 0 6 4.8 6 8.8a6 6 0 0 1-12 0c0-4 2.6-8.8 6-8.8z"></path></svg>High protein</span>
+<span style="display: flex; align-items: center; gap: 6px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 7.5V12l3 2"></path></svg>Quick</span>
+</div>
+<div style="border-top: 1px solid #2B2823; padding: 12px">
+<div style="aspect-ratio: 1 / 1; width: 100%; background: #E6E0D5; display: flex; align-items: center; justify-content: center; font-size: 11px; letter-spacing: 0.16em; color: #5E5A52">PHOTO</div>
+</div>
+</div>
+<button type="button" onClick="{{toggleAdd}}" style="{{addStyle}}">
+<sc-if value="{{added}}" hint-placeholder-val="{{ false }}">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>
+</sc-if>
+<span>{{addLabel}}</span>
+</button>
+</div>
+
+<div style="flex: 999 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 36px">
+<section aria-label="Ingredients" style="display: flex; flex-direction: column; gap: 22px">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding-bottom: 10px; border-bottom: 1px solid #2B2823">
+<h2 style="margin: 0; font-size: 13px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase">Ingredients</h2>
+<span style="font-size: 11px; letter-spacing: 0.06em; color: #5E5A52">SERVES 2</span>
+</div>
+<ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 24px">
+<sc-for list="{{ingredients}}" as="ing" hint-placeholder-count="6">
+<li style="display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; align-items: baseline; gap: 10px">
+<span style="font-size: 15px">{{ing.name}}</span>
+<span aria-hidden="true" style="flex: 1 1 auto; min-width: 24px; border-bottom: 1px dotted #8F877A"></span>
+<span style="font-size: 14px; white-space: nowrap">{{ing.amount}}</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<sc-for list="{{ing.options}}" as="opt" hint-placeholder-count="1">
+<figure style="margin: 0; width: 76px; display: flex; flex-direction: column; gap: 6px">
+<div style="width: 76px; height: 76px; background: #E6E0D5; display: flex; align-items: center; justify-content: center; font-size: 9px; letter-spacing: 0.14em; color: #5E5A52">PHOTO</div>
+<figcaption style="font-size: 10px; line-height: 1.3; letter-spacing: 0.06em; text-transform: uppercase; color: #3F3B34">{{opt.store}}</figcaption>
+</figure>
+</sc-for>
+</div>
+</li>
+</sc-for>
+</ul>
+</section>
+
+<section aria-label="Nutrition" style="background: #F9F7F2; border: 1px solid #2B2823">
+<div style="padding: 12px 18px; display: flex; align-items: baseline; justify-content: space-between; gap: 12px; border-bottom: 1px solid #2B2823">
+<h2 style="margin: 0; font-size: 13px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase">Nutrition</h2>
+<span style="font-size: 11px; letter-spacing: 0.06em; color: #5E5A52">PER SERVING</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(84px, 1fr)); gap: 16px; padding: 16px 18px">
+<sc-for list="{{nutrition}}" as="n" hint-placeholder-count="5">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<span style="font-size: 20px; font-weight: 500">{{n.value}}<span style="font-size: 12px; font-weight: 400; color: #5E5A52"> {{n.unit}}</span></span>
+<span style="font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: #5E5A52">{{n.label}}</span>
+</div>
+</sc-for>
+</div>
+</section>
+</div>
+</div>
+
+<section aria-label="Recipe" style="display: flex; flex-wrap: wrap; background: #F9F7F2">
+<div style="flex: 999 1 460px; min-width: 0; padding: 20px 22px 24px; display: flex; flex-direction: column; gap: 18px; box-shadow: 1px 0 0 0 #2B2823, 0 1px 0 0 #2B2823, 1px 1px 0 0 #2B2823, 1px 0 0 0 #2B2823 inset, 0 1px 0 0 #2B2823 inset">
+<h2 style="margin: 0; font-size: 13px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase">Recipe</h2>
+<ol style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 16px">
+<sc-for list="{{steps}}" as="st" hint-placeholder-count="5">
+<li style="display: flex; gap: 16px; font-size: 15px; line-height: 1.6">
+<span style="flex: none; width: 26px; font-size: 12px; line-height: 2; color: #5E5A52">{{st.no}}</span>
+<span style="text-wrap: pretty">{{st.text}}</span>
+</li>
+</sc-for>
+</ol>
+</div>
+<div style="flex: 1 1 260px; min-width: 0; padding: 20px 22px 24px; display: flex; flex-direction: column; gap: 22px; box-shadow: 1px 0 0 0 #2B2823, 0 1px 0 0 #2B2823, 1px 1px 0 0 #2B2823, 1px 0 0 0 #2B2823 inset, 0 1px 0 0 #2B2823 inset">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<h3 style="margin: 0; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase">Notes</h3>
+<p style="margin: 0; font-size: 14px; line-height: 1.6; color: #3F3B34">[Your notes about this recipe]</p>
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<h3 style="margin: 0; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase">Optional add-ons</h3>
+<ul style="margin: 0; padding: 0 0 0 18px; font-size: 14px; line-height: 1.8; color: #3F3B34">
+<li>[Add-on]</li>
+<li>[Add-on]</li>
+</ul>
+</div>
+</div>
+</section>
+</div>
+</sc-if>
+
+<sc-if value="{{cooking}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 20px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<span style="font-size: 11px; letter-spacing: 0.06em; color: #5E5A52">NO. 01</span>
+<h1 style="margin: 0; font-size: 20px; font-weight: 500; letter-spacing: 0.02em; text-transform: uppercase">Miso salmon rice bowl</h1>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 24px">
+<section aria-label="Steps" style="flex: 999 1 480px; min-width: 0; background: #F9F7F2; border: 1px solid #2B2823">
+<div style="padding: 12px 18px; display: flex; align-items: baseline; justify-content: space-between; gap: 12px">
+<h2 style="margin: 0; font-size: 13px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase">Steps</h2>
+<span style="font-size: 11px; letter-spacing: 0.06em; color: #5E5A52">{{doneLabel}}</span>
+</div>
+<sc-for list="{{steps}}" as="st" hint-placeholder-count="5">
+<button type="button" aria-pressed="{{st.done}}" onClick="{{st.toggle}}" style="{{st.style}}">
+<span style="flex: none; width: 30px; font-size: 13px; line-height: 1.9">{{st.no}}</span>
+<span style="{{st.textStyle}}">{{st.text}}</span>
+</button>
+</sc-for>
+</section>
+<section aria-label="Ingredients checklist" style="flex: 1 1 300px; min-width: 0; background: #F9F7F2; border: 1px solid #2B2823">
+<div style="padding: 12px 18px">
+<h2 style="margin: 0; font-size: 13px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase">Ingredients</h2>
+</div>
+<sc-for list="{{ingredients}}" as="ing" hint-placeholder-count="6">
+<button type="button" aria-pressed="{{ing.got}}" onClick="{{ing.toggle}}" style="width: 100%; min-height: 52px; padding: 10px 18px; border: 0; border-top: 1px solid #2B2823; background: transparent; color: #2B2823; font-family: inherit; font-size: 14px; text-align: left; display: flex; align-items: center; gap: 12px; cursor: pointer">
+<span style="{{ing.boxStyle}}">
+<sc-if value="{{ing.got}}" hint-placeholder-val="{{ false }}">
+<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>
+</sc-if>
+</span>
+<span style="{{ing.nameStyle}}">{{ing.name}}</span>
+<span style="flex: none; font-size: 13px; color: #5E5A52">{{ing.amount}}</span>
+</button>
+</sc-for>
+</section>
+</div>
+</div>
+</sc-if>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"cookingDefault":{"editor":"boolean","default":false},"$preview":{"width":1280,"height":1780}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { cooking: !!props.cookingDefault, added: false, done: {}, got: {} };
+  }
+  renderVals() {
+    const s = this.state;
+    const rawIngredients = [
+      { name: 'Salmon fillets', amount: '2 fillets', options: [{ store: 'Costco' }, { store: "Trader Joe's" }] },
+      { name: 'White miso paste', amount: '2 tbsp', options: [{ store: 'Whole Foods' }] },
+      { name: 'Short-grain rice', amount: '1 cup', options: [{ store: 'Costco' }, { store: 'Grocery' }] },
+      { name: 'Persian cucumbers', amount: '2', options: [{ store: "Trader Joe's" }] },
+      { name: 'Scallions', amount: '1 bunch', options: [{ store: 'Grocery' }] },
+      { name: 'Toasted sesame seeds', amount: '1 tbsp', options: [{ store: "Trader Joe's" }] }
+    ];
+    const rawSteps = [
+      'Rinse the rice until the water runs clear, then start it cooking.',
+      'Stir the miso with a splash of water until smooth and brush it over the salmon.',
+      'Roast the salmon at 425°F until it flakes easily, about 10–12 minutes.',
+      'Thinly slice the cucumbers and scallions.',
+      'Fill bowls with rice, then top with salmon, cucumber, scallions and sesame seeds.'
+    ];
+    const ingredients = rawIngredients.map((ing, i) => {
+      const got = !!s.got[i];
+      return Object.assign({}, ing, {
+        got,
+        toggle: () => this.setState({ got: Object.assign({}, s.got, { [i]: !got }) }),
+        boxStyle: 'flex: none; width: 20px; height: 20px; box-sizing: border-box; border: 1px solid #2B2823; display: flex; align-items: center; justify-content: center; ' + (got ? 'background: #2B2823; color: #F6F3ED' : 'background: transparent'),
+        nameStyle: 'flex: 1 1 auto; ' + (got ? 'color: #8F877A; text-decoration: line-through' : '')
+      });
+    });
+    let doneCount = 0;
+    const steps = rawSteps.map((text, i) => {
+      const done = !!s.done[i];
+      if (done) doneCount++;
+      return {
+        no: String(i + 1).padStart(2, '0'),
+        text,
+        done,
+        toggle: () => this.setState({ done: Object.assign({}, s.done, { [i]: !done }) }),
+        style: 'width: 100%; padding: 18px 18px 20px; border: 0; border-top: 1px solid #2B2823; background: transparent; color: ' + (done ? '#8F877A' : '#2B2823') + '; font-family: inherit; text-align: left; display: flex; gap: 14px; cursor: pointer',
+        textStyle: 'font-size: 18px; line-height: 1.55; text-wrap: pretty; ' + (done ? 'text-decoration: line-through' : '')
+      };
+    });
+    const base = 'width: 100%; height: 50px; border: 1px solid #2B2823; font-family: inherit; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; ';
+    return {
+      cooking: s.cooking,
+      browsing: !s.cooking,
+      toggleCooking: () => this.setState({ cooking: !s.cooking }),
+      trackStyle: 'position: relative; width: 40px; height: 22px; box-sizing: border-box; border: 1px solid #2B2823; border-radius: 999px; display: block; ' + (s.cooking ? 'background: #2B2823' : 'background: transparent'),
+      knobStyle: 'position: absolute; top: 3px; left: ' + (s.cooking ? '21px' : '3px') + '; width: 14px; height: 14px; border-radius: 50%; display: block; ' + (s.cooking ? 'background: #F6F3ED' : 'background: #2B2823'),
+      ingredients,
+      steps,
+      doneLabel: doneCount + ' OF ' + steps.length + ' DONE',
+      nutrition: [
+        { label: 'Calories', value: '—', unit: 'kcal' },
+        { label: 'Protein', value: '—', unit: 'g' },
+        { label: 'Carbs', value: '—', unit: 'g' },
+        { label: 'Fat', value: '—', unit: 'g' },
+        { label: 'Fiber', value: '—', unit: 'g' }
+      ],
+      added: s.added,
+      addLabel: s.added ? 'Added to list' : 'Add to grocery list',
+      addStyle: base + (s.added ? 'background: transparent; color: #2B2823' : 'background: #2B2823; color: #F6F3ED'),
+      toggleAdd: () => this.setState({ added: !s.added })
+    };
+  }
+}
+</script>
+</body>
+</html>

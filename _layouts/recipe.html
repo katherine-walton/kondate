@@ -1,13 +1,134 @@
 ---
 layout: default
 ---
-{%- comment -%}
-  Placeholder dish page so menu links work. The full design (ingredients,
-  nutrition, steps, cooking mode) gets built in the next step.
-{%- endcomment -%}
-<div class="stack">
-  <nav><a class="back-link" href="{{ '/' | relative_url }}">← All dishes</a></nav>
-  <div style="max-width: 480px; width: 100%">
-    {% include dish-card.html recipe=page %}
+{%- assign catalog = site.data.ingredients -%}
+<div class="stack stack--tight" data-dish data-slug="{{ page.slug }}">
+  {% include site-header.html home_link=true %}
+
+  <div class="dish-toolbar">
+    <a class="back-link" href="{{ '/' | relative_url }}">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+      <span>All dishes</span>
+    </a>
+    <button type="button" class="switch" aria-pressed="false" data-cooking-toggle>
+      <span>Cooking mode</span>
+      <span class="switch__track" aria-hidden="true"><span class="switch__knob"></span></span>
+    </button>
+  </div>
+
+  {%- comment -%} ---------- Normal mode ---------- {%- endcomment %}
+  <div class="dish-browse" data-view="browse">
+    <div class="dish-top">
+      <div class="dish-left">
+        {% include dish-card.html recipe=page large=true %}
+        <button type="button" class="btn btn--filled btn--block" data-add-toggle aria-pressed="false">
+          <svg class="add-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+          <span data-add-label>Add to grocery list</span>
+        </button>
+      </div>
+
+      <div class="dish-right">
+        <section class="ingredients" aria-labelledby="ingredients-heading">
+          <div class="section-head section-head--ruled">
+            <h2 id="ingredients-heading" class="section-title">Ingredients</h2>
+            {%- if page.servings %}<span class="label-muted">Serves {{ page.servings }}</span>{% endif %}
+          </div>
+          <ul class="ingredient-list">
+            {%- for line in page.ingredients %}
+            {%- assign ing = catalog[line.item] %}
+            <li class="ingredient">
+              <div class="leader-line">
+                <span class="leader-line__name">{% if ing %}{{ ing.name }}{% else %}{{ line.item }}{% endif %}</span>
+                <span class="leader" aria-hidden="true"></span>
+                <span class="leader-line__value">{% include amount.html amount=line.amount unit=ing.unit %}</span>
+              </div>
+              {%- if ing.options and ing.options.size > 0 %}
+              {%- assign first = ing.options[0] %}
+              <figure class="product">
+                {%- if first.photo %}
+                <img class="product__photo" src="{{ first.photo | relative_url }}" alt="{{ ing.name }}" loading="lazy" width="76" height="76">
+                {%- else %}
+                <div class="product__photo photo-placeholder photo-placeholder--small" aria-hidden="true">PHOTO</div>
+                {%- endif %}
+                <figcaption class="product__stores">{{ ing.options | map: "store" | join: " · " }}</figcaption>
+              </figure>
+              {%- endif %}
+            </li>
+            {%- endfor %}
+          </ul>
+        </section>
+
+        {%- assign n = page.nutrition %}
+        <section class="card" aria-labelledby="nutrition-heading">
+          <div class="section-head card__head">
+            <h2 id="nutrition-heading" class="section-title">Nutrition</h2>
+            <span class="label-muted">Per serving</span>
+          </div>
+          <dl class="nutrition">
+            <div><dt>Calories</dt><dd>{{ n.calories | default: "—" }}<span> kcal</span></dd></div>
+            <div><dt>Protein</dt><dd>{{ n.protein | default: "—" }}<span> g</span></dd></div>
+            <div><dt>Carbs</dt><dd>{{ n.carbs | default: "—" }}<span> g</span></dd></div>
+            <div><dt>Fat</dt><dd>{{ n.fat | default: "—" }}<span> g</span></dd></div>
+            <div><dt>Fiber</dt><dd>{{ n.fiber | default: "—" }}<span> g</span></dd></div>
+          </dl>
+        </section>
+      </div>
+    </div>
+
+    <section class="recipe-card" aria-labelledby="recipe-heading">
+      <div class="recipe-card__pane recipe-card__steps">
+        <h2 id="recipe-heading" class="section-title">Recipe</h2>
+        <div class="steps" data-steps>{{ content }}</div>
+      </div>
+      {%- if page.notes or page.addons %}
+      <div class="recipe-card__pane recipe-card__side">
+        {%- if page.notes %}
+        <div class="side-block">
+          <h3 class="side-title">Notes</h3>
+          <p>{{ page.notes }}</p>
+        </div>
+        {%- endif %}
+        {%- if page.addons and page.addons.size > 0 %}
+        <div class="side-block">
+          <h3 class="side-title">Optional add-ons</h3>
+          <ul>
+            {%- for a in page.addons %}<li>{{ a }}</li>{% endfor %}
+          </ul>
+        </div>
+        {%- endif %}
+      </div>
+      {%- endif %}
+    </section>
+  </div>
+
+  {%- comment -%} ---------- Cooking mode ---------- {%- endcomment %}
+  <div class="dish-cooking" data-view="cooking" hidden>
+    <div class="cook-title">
+      <span class="dish-card__no">NO. {% include recipe-number.html n=page.number %}</span>
+      <p class="cook-title__name">{{ page.title }}</p>
+    </div>
+    <div class="cook-grid">
+      <section class="card cook-steps" aria-labelledby="cook-steps-heading">
+        <div class="section-head card__head card__head--flush">
+          <h2 id="cook-steps-heading" class="section-title">Steps</h2>
+          <span class="label-muted" data-done-label aria-live="polite"></span>
+        </div>
+        <div data-cook-steps></div>
+      </section>
+      <section class="card cook-ingredients" aria-labelledby="cook-ing-heading">
+        <div class="section-head card__head card__head--flush">
+          <h2 id="cook-ing-heading" class="section-title">Ingredients</h2>
+        </div>
+        {%- for line in page.ingredients %}
+        {%- assign ing = catalog[line.item] %}
+        <button type="button" class="check-row" aria-pressed="false" data-check>
+          <span class="checkbox" aria-hidden="true">{% include icon.html name="check" px=12 %}</span>
+          <span class="check-row__name">{% if ing %}{{ ing.name }}{% else %}{{ line.item }}{% endif %}</span>
+          <span class="check-row__amount">{% include amount.html amount=line.amount unit=ing.unit %}</span>
+        </button>
+        {%- endfor %}
+      </section>
+    </div>
   </div>
 </div>
+<script src="{{ '/assets/js/dish.js' | relative_url }}" defer></script>

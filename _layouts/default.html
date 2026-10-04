@@ -16,7 +16,5 @@
     {{ content }}
   </div>
   <script src="{{ '/assets/js/list-store.js' | relative_url }}"></script>
-  {% if page.scripts %}{% for s in page.scripts %}<script src="{{ s | relative_url }}"></script>
-  {% endfor %}{% endif %}
 </body>
 </html>

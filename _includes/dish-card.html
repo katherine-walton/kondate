@@ -1,12 +1,14 @@
 {%- comment -%}
   Dish card: number + name, tag row, square photo.
-  Usage: {% include dish-card.html recipe=recipe link=true %}
+  Usage: {% include dish-card.html recipe=recipe link=true %}      (menu grid)
+         {% include dish-card.html recipe=page large=true %}       (dish page; name is the h1)
 {%- endcomment -%}
 {%- assign r = include.recipe -%}
-{%- if include.link -%}<a class="dish-card" href="{{ r.url | relative_url }}">{%- else -%}<div class="dish-card">{%- endif %}
+{%- if include.large -%}{%- assign heading = "h1" -%}{%- else -%}{%- assign heading = "h3" -%}{%- endif -%}
+{%- if include.link -%}<a class="dish-card" href="{{ r.url | relative_url }}">{%- else -%}<div class="dish-card{% if include.large %} dish-card--large{% endif %}">{%- endif %}
   <div class="dish-card__head">
     <span class="dish-card__no">NO. {% include recipe-number.html n=r.number %}</span>
-    <h3 class="dish-card__name">{{ r.title }}</h3>
+    <{{ heading }} class="dish-card__name">{{ r.title }}</{{ heading }}>
   </div>
   {%- if r.tags and r.tags.size > 0 %}
   <div class="dish-card__tags">
@@ -17,7 +19,7 @@
   {%- endif %}
   <div class="dish-card__photo">
     {%- if r.photo %}
-    <img src="{{ r.photo | relative_url }}" alt="{{ r.title }}" loading="lazy" width="800" height="800">
+    <img src="{{ r.photo | relative_url }}" alt="{{ r.title }}"{% unless include.large %} loading="lazy"{% endunless %} width="800" height="800">
     {%- else %}
     <div class="photo-placeholder" aria-hidden="true">PHOTO</div>
     {%- endif %}

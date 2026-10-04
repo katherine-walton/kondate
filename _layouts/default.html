@@ -9,12 +9,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}?v={{ site.time | date: '%s' }}">
 </head>
 <body>
   <div class="page">
     {{ content }}
   </div>
-  <script src="{{ '/assets/js/list-store.js' | relative_url }}"></script>
+  <script src="{{ '/assets/js/list-store.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
 </body>
 </html>

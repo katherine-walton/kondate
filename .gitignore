@@ -5,3 +5,7 @@ _site/
 vendor/
 .DS_Store
 .claude/
+node_modules/
+.test-site/
+test-results/
+playwright-report/

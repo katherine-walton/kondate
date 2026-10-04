@@ -38,3 +38,22 @@ bundle exec jekyll serve --livereload
 ```
 
 Then open http://localhost:4000/kondate/
+
+## Tests
+
+Browser tests (Playwright) build the site and click through the menu, dish page and
+grocery list on a desktop and a phone screen. They also check recipe files for
+mistakes, like an ingredient that isn't in `_data/ingredients.yml` or a missing photo.
+
+```bash
+npm install
+npx playwright install chromium
+npm test
+```
+
+The tests run automatically before every `git push` and stop the push if anything
+fails. On a new computer, turn that on once with:
+
+```bash
+git config core.hooksPath .githooks
+```

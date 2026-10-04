@@ -1,0 +1,17 @@
+#!/bin/sh
+# Runs the browser tests before every `git push`. If any fail, the push is stopped.
+# Skip in an emergency with: git push --no-verify
+
+cd "$(git rev-parse --show-toplevel)" || exit 1
+
+if [ ! -d node_modules/@playwright/test ]; then
+  echo "pre-push: test tools not installed. Run: npm install && npx playwright install chromium"
+  exit 1
+fi
+
+echo "pre-push: running tests..."
+if ! npm test --silent; then
+  echo ""
+  echo "pre-push: tests failed, so nothing was pushed. Fix the failures above and push again."
+  exit 1
+fi

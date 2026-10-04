@@ -1,0 +1,76 @@
+---
+layout: default
+title: Grocery list
+permalink: /list/
+---
+<div class="stack stack--tight" data-grocery>
+  <header class="site-header">
+    <a class="site-title" href="{{ '/' | relative_url }}">Kondate</a>
+    <a class="btn btn--filled" href="{{ '/' | relative_url }}" aria-label="Close grocery list">
+      {% include icon.html name="close" px=16 %}
+      <span>Close</span>
+    </a>
+  </header>
+
+  <div class="list-head">
+    <div class="list-head__title">
+      <h1 class="page-title">Grocery list</h1>
+      <span class="label-muted" data-summary></span>
+    </div>
+    <div class="list-head__actions">
+      <button type="button" class="btn btn--filled btn--small" data-share>
+        {% include icon.html name="share" px=16 %}
+        <span data-share-label>Share list</span>
+      </button>
+      <button type="button" class="btn btn--outline btn--small" data-clear>Start over</button>
+    </div>
+  </div>
+
+  <div class="list-body">
+    <aside class="list-recipes" aria-labelledby="list-recipes-heading">
+      <h2 id="list-recipes-heading" class="section-title">Recipes</h2>
+      <p class="empty-note" data-empty hidden>No recipes yet. Add one from a dish page.</p>
+      <ul class="plain-list list-recipes__items" data-recipes></ul>
+    </aside>
+
+    <section class="list-items" aria-label="Items to buy">
+      <div class="list-group">
+        <div class="section-head list-group__head">
+          <h2 class="section-title">To buy</h2>
+          <span class="label-muted" data-left-label></span>
+        </div>
+        <ul class="plain-list" data-to-buy></ul>
+      </div>
+
+      <div class="list-group list-group--basket" data-basket hidden>
+        <div class="section-head list-group__head">
+          <h2 class="section-title">In the basket</h2>
+          <span class="label-muted" data-got-label></span>
+        </div>
+        <ul class="plain-list" data-got></ul>
+      </div>
+    </section>
+  </div>
+</div>
+
+{%- comment -%} Recipe + ingredient data for the list script. {%- endcomment %}
+<script type="application/json" id="kondate-data">
+{
+  "baseurl": {{ site.baseurl | jsonify }},
+  "ingredients": {{ site.data.ingredients | jsonify }},
+  "recipes": [
+    {%- assign recipes = site.recipes | sort: "number" -%}
+    {%- for r in recipes %}
+    {
+      "slug": {{ r.slug | jsonify }},
+      "title": {{ r.title | jsonify }},
+      "number": {{ r.number | jsonify }},
+      "photo": {{ r.photo | jsonify }},
+      "url": {{ r.url | relative_url | jsonify }},
+      "ingredients": {{ r.ingredients | jsonify }}
+    }{% unless forloop.last %},{% endunless %}
+    {%- endfor %}
+  ]
+}
+</script>
+<script src="{{ '/assets/js/grocery.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>

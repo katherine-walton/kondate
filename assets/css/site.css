@@ -591,3 +591,204 @@ a.site-title { text-decoration: none; }
 
 .cook-step:focus-visible,
 .check-row:focus-visible { outline: 2px solid var(--ink); outline-offset: -2px; }
+
+/* ---------- Grocery list ---------- */
+
+.plain-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.btn--small { font-size: 12px; gap: 8px; }
+
+.page-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.list-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 18px;
+  border-bottom: var(--line);
+}
+.list-head__title {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.list-head__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.list-body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.list-recipes {
+  flex: 1 1 300px;
+  max-width: 380px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.list-recipes__items {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.empty-note {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.list-recipe {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  background: var(--card);
+  border: var(--line);
+}
+.list-recipe__photo {
+  flex: none;
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  background: var(--placeholder);
+}
+.list-recipe__link {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-decoration: none;
+}
+.list-recipe__link:hover .list-recipe__name { text-decoration: underline; text-underline-offset: 3px; }
+.list-recipe__name {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.icon-btn {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.icon-btn:hover { background: var(--bg); }
+.icon-btn:focus-visible { outline: 2px solid var(--ink); outline-offset: -2px; }
+
+.list-items {
+  flex: 999 1 460px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.list-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.list-group__head { padding-bottom: 6px; }
+.list-group--basket .list-group__head {
+  border-top: var(--line);
+  padding-top: 16px;
+}
+.list-group--basket .section-title { color: var(--muted); }
+
+.grocery-item {
+  width: 100%;
+  padding: 12px 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font-family: inherit;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+}
+.grocery-item:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+.checkbox--lg { width: 22px; height: 22px; }
+
+.grocery-item__photo {
+  flex: none;
+  width: 52px;
+  height: 52px;
+  object-fit: cover;
+  background: var(--placeholder);
+}
+.grocery-item__photo.photo-placeholder { font-size: 8px; }
+
+.grocery-item__body {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.grocery-item .leader { min-width: 16px; }
+.grocery-item .grocery-item__total { font-weight: 500; }
+
+.grocery-item__stores {
+  font-size: 11px;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.grocery-item__breakdown {
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+/* In the basket */
+.grocery-item--got {
+  min-height: 48px;
+  padding: 8px 0;
+  color: var(--done);
+}
+.grocery-item--got .checkbox { background: var(--ink); color: var(--bg); }
+.grocery-item--got .grocery-item__name {
+  flex: 1 1 auto;
+  font-size: 14px;
+  text-decoration: line-through;
+}
+.grocery-item--got .grocery-item__total {
+  font-size: 13px;
+  font-weight: 400;
+  white-space: nowrap;
+  text-decoration: line-through;
+}

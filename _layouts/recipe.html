@@ -85,7 +85,12 @@ layout: default
         {%- if page.notes %}
         <div class="side-block">
           <h3 class="side-title">Notes</h3>
-          <p>{{ page.notes }}</p>
+          {%- capture newline %}
+{% endcapture %}
+          {%- assign note_paras = page.notes | split: newline %}
+          {%- for para in note_paras %}{% assign para = para | strip %}{% if para != "" %}
+          <p>{{ para }}</p>
+          {%- endif %}{% endfor %}
         </div>
         {%- endif %}
         {%- if page.addons and page.addons.size > 0 %}

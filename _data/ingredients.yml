@@ -4,7 +4,7 @@
 #     name: Display name
 #     unit: [singular, plural]   # use ["", ""] for plain counts
 #     options:                   # store + photo pairs, in display order
-#       - store: Costco          # Costco, Whole Foods, Trader Joe's, Grocery
+#       - store: Costco          # Costco, Whole Foods, Trader Joe's, Piazza, Grocery
 #         photo: /assets/ingredients/file.jpg   # optional
 
 salmon-fillet:
@@ -60,6 +60,116 @@ kale:
 
 lemon:
   name: Lemons
+  unit: ["", ""]
+  options:
+    - store: Grocery
+
+cannellini-beans:
+  name: Dried cannellini beans
+  unit: [g, g]
+  options:
+    - store: Piazza
+      photo: /assets/ingredients/cannellini-beans.jpeg
+
+onion:
+  name: Onions
+  unit: ["", ""]
+  options:
+    - store: Grocery
+      photo: /assets/ingredients/onions.png
+
+carrot:
+  name: Carrots
+  unit: ["", ""]
+  options:
+    - store: Grocery
+      photo: /assets/ingredients/carrots.png
+
+celery:
+  name: Celery
+  unit: [stalk, stalks]
+  options:
+    - store: Grocery
+      photo: /assets/ingredients/celery.png
+
+garlic:
+  name: Garlic
+  unit: [clove, cloves]
+  options:
+    - store: Grocery
+      photo: /assets/ingredients/garlic.png
+
+dried-oregano:
+  name: Dried oregano
+  unit: [tsp, tsp]
+  options:
+    - store: Grocery
+      photo: /assets/ingredients/oregano.png
+
+dried-thyme:
+  name: Dried thyme
+  unit: [tsp, tsp]
+  options:
+    - store: Grocery
+      photo: /assets/ingredients/thyme.png
+
+bay-leaf:
+  name: Bay leaves
+  unit: ["", ""]
+  options:
+    - store: Grocery
+      photo: /assets/ingredients/bay-leaves.png
+
+spanish-chorizo:
+  name: Cured Spanish chorizo
+  unit: [oz, oz]
+  options:
+    - store: Whole Foods
+
+champagne-vinegar:
+  name: Champagne vinegar
+  unit: [tbsp, tbsp]
+  options:
+    - store: Trader Joe's
+
+tomato-paste:
+  name: Tomato paste
+  unit: [tsp, tsp]
+  options:
+    - store: Grocery
+
+russet-potato:
+  name: Russet potatoes
+  unit: ["", ""]
+  options:
+    - store: Grocery
+
+egg-whites:
+  name: Egg whites
+  unit: [cup, cups]
+  options:
+    - store: Costco
+
+cottage-cheese:
+  name: Cottage cheese (2%)
+  unit: [cup, cups]
+  options:
+    - store: Grocery
+
+monterey-jack:
+  name: Shredded Monterey Jack
+  unit: [cup, cups]
+  options:
+    - store: Grocery
+
+cornstarch:
+  name: Cornstarch
+  unit: [tbsp, tbsp]
+  options:
+    - store: Grocery
+
+bell-pepper:
+  name: Bell peppers
   unit: ["", ""]
   options:
     - store: Grocery

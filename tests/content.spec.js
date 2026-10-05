@@ -33,7 +33,7 @@ test.describe("recipe content", () => {
 
   test("every ingredient has a name, a [singular, plural] unit and a store", async ({ page }) => {
     const data = await loadSiteData(page);
-    const stores = ["Costco", "Whole Foods", "Trader Joe's", "Grocery"];
+    const stores = ["Costco", "Whole Foods", "Trader Joe's", "Piazza", "Grocery"];
     for (const [key, ing] of Object.entries(data.ingredients)) {
       expect(ing.name, `${key}: name`).toBeTruthy();
       expect(Array.isArray(ing.unit) && ing.unit.length === 2, `${key}: unit should be [singular, plural]`).toBe(true);

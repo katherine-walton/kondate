@@ -71,7 +71,7 @@ salmon-fillet:
       photo: /assets/ingredients/salmon-tj.jpg
 ```
 
-Stores: `Costco`, `Whole Foods`, `Trader Joe's`, `Grocery` (generic).
+Stores: `Costco`, `Whole Foods`, `Trader Joe's`, `Piazza`, `Grocery` (generic).
 Each ingredient has exactly one unit, so amounts across recipes can be summed.
 v1 shows the **first** option's photo and lists all store names as text.
 
